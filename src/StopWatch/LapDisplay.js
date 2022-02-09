@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { getDisplayTime } from "../utils";
 
 const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
-  useEffect(() => {
-    console.log(currentLapDuration);
-  }, [currentLapDuration]);
   return (
     <div id="stopWatchLapDisplay">
       {currentLapDuration ? (

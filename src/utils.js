@@ -12,7 +12,7 @@ const msConvert = (ms) => {
 
 const getDisplayTime = (ms) => {
   const { mm, ss, dd } = msConvert(ms);
-  return `${mm}:${ss}:${dd}`;
+  return `${mm}:${ss}.${dd}`;
 };
 
 export { msConvert, getDisplayTime };
