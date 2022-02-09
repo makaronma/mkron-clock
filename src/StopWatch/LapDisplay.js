@@ -1,19 +1,27 @@
-import React from "react";
-import { msConvert } from "../utils";
+import React, { useEffect } from "react";
+import { getDisplayTime } from "../utils";
 
-const LapDisplay = ({ lapTimeDifList }) => {
+const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
+  useEffect(() => {
+    console.log(currentLapDuration);
+  }, [currentLapDuration]);
   return (
     <div id="stopWatchLapDisplay">
+      {currentLapDuration ? (
+        <div className="lap">
+          <div className="left">Lap {lapTimeDifList.length + 1}</div>
+          <div className="right">{getDisplayTime(currentLapDuration)}</div>
+        </div>
+      ) : null}
+
       {lapTimeDifList
         .slice(0)
         .reverse()
         .map((lap, index) => {
-            const { hh, mm, ss } = msConvert(lap);
-            return (
+          return (
             <div className="lap" key={index}>
               <div className="left">Lap {lapTimeDifList.length - index}</div>
-              <div className="right">{JSON.stringify(lap)}</div>
-              {/* <div className="right">{`${hh}:${mm}:${ss}`}</div> */}
+              <div className="right">{getDisplayTime(lap)}</div>
             </div>
           );
         })}

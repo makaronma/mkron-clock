@@ -2,12 +2,12 @@ import React from "react";
 import { msConvert } from "../utils";
 
 const TimeDisplay = ({ ms }) => {
-  const { hh, mm, ss } = msConvert(ms);
+  const { mm, ss, dd } = msConvert(ms);
   return (
     <div id="stopWatchTimeDisplay">
-      <span>{hh}</span>
       <span>{mm}</span>
       <span>{ss}</span>
+      <span>{dd}</span>
     </div>
   );
 };

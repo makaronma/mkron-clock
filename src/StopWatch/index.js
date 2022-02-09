@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import TimeDisplay from "./TimeDisplay";
 import LapDisplay from "./LapDisplay";
 import "../styles/stopwatch.css";
@@ -12,34 +12,40 @@ const StopWatch = () => {
   const [lapTimeList, setLapTimeList] = useState([]); // for calculate time dif
   const [lapTimeDifList, setTimeDifLapList] = useState([]);
 
+  const [currentLapDuration, setCurrentLapDuration] = useState(0);
+
   const [pauseTime, setPauseTime] = useState(null);
   const [pausedDuration, setPausedDuration] = useState(0);
 
   // Init Time
   useEffect(() => {
     if (!started) return;
-    setStartMs(Date.now());
+    const curr = Date.now()
+    setStartMs(curr);
+    setLapTimeList([curr]);
   }, [started]);
 
   // Display Time Change
   useEffect(() => {
     if (!running) return;
     const stopWatchInterval = setInterval(() => {
-      setMs(Date.now() - startMs);
-    }, 50);
+      const curr = Date.now();
+      setMs(curr - startMs);
+      setCurrentLapDuration(
+        curr - lapTimeList[lapTimeList.length - 1] - pausedDuration
+      );
+    }, 30);
     return () => clearInterval(stopWatchInterval);
-  }, [running, startMs, ms]);
+  }, [running, startMs, ms, lapTimeList, pausedDuration]);
 
   // Start / Stop Btn
   const handleStartStopBtnClick = () => {
-    console.log(pausedDuration);
+    const curr = Date.now()
 
     // if not started
     if (!started) {
       // start stopwatch time count
       setStarted(true);
-      // set starting time
-      setLapTimeList([Date.now()]); //##
       // start running
       setRunning(true);
       return;
@@ -47,31 +53,29 @@ const StopWatch = () => {
     // if started already
     if (running) {
       // stop
-      console.log("stop");
       setRunning(false);
-      setPauseTime(Date.now());
+      setPauseTime(curr);
     } else {
       // continue
       setRunning(true);
-      setPausedDuration((prev) => prev + Date.now() - pauseTime); //##
-      setStartMs((prev) => prev + Date.now() - pauseTime); //##
+      setPausedDuration((prev) => prev + curr - pauseTime);
+      setStartMs((prev) => prev + curr - pauseTime);
     }
   };
 
   // Lap Btn
   const handleLapBtnClick = () => {
+    const curr = Date.now();
     // Add current time
-    setLapTimeList((prev) => [...prev, Date.now()]); //##
+    setLapTimeList((prev) => [...prev, curr]);
 
     // Add time dif between current time and prev lap time
     setTimeDifLapList((prevLapList) => {
-      console.log("duration: " + pausedDuration);
-      const dif =
-        Date.now() - lapTimeList[lapTimeList.length - 1] - pausedDuration;
-      console.log(dif);
+      const dif = curr - lapTimeList[lapTimeList.length - 1] - pausedDuration;
       return [...prevLapList, dif];
-    }); //##
-    setPausedDuration(0); //##
+    });
+    setPausedDuration(0);
+    setCurrentLapDuration(0);
   };
 
   // Reset Btn
@@ -80,14 +84,11 @@ const StopWatch = () => {
     setStarted(false);
     setMs(0);
     // Clear laps
-    setLapTimeList([]); //##
-    setTimeDifLapList([]); //##
-    setPausedDuration(0); //##
+    setLapTimeList([]);
+    setTimeDifLapList([]);
+    setPausedDuration(0);
+    setCurrentLapDuration(0);
   }, []);
-
-  // useEffect(() => {
-  //   console.log(lapTimeDifList);
-  // }, [lapTimeDifList]);
 
   return (
     <div className="miniApp">
@@ -107,7 +108,10 @@ const StopWatch = () => {
           <button onClick={handleStartStopBtnClick}>Start</button>
         )}
       </div>
-      <LapDisplay lapTimeDifList={lapTimeDifList} />
+      <LapDisplay
+        lapTimeDifList={lapTimeDifList}
+        currentLapDuration={currentLapDuration}
+      />
     </div>
   );
 };
