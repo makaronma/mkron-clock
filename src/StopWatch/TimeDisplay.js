@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import { msConvert } from "../utils";
 
-const TimeDisplay = () => {
+const TimeDisplay = ({ ms }) => {
+  const { hh, mm, ss } = msConvert(ms);
   return (
-    <div>Time Display</div>
-  )
-}
+    <div id="stopWatchTimeDisplay">
+      <span>{hh}</span>
+      <span>{mm}</span>
+      <span>{ss}</span>
+    </div>
+  );
+};
 
 export default TimeDisplay;
