@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TimeDisplay from "./TimeDisplay";
 import LapDisplay from "./LapDisplay";
-import Clock from './Clock'
+import Clock from "./Clock";
 import "../styles/stopwatch.css";
 
 const StopWatch = () => {
@@ -35,12 +35,12 @@ const StopWatch = () => {
       setCurrentLapDuration(
         curr - lapTimeList[lapTimeList.length - 1] - pausedDuration
       );
-    }, 100);
+    }, 50);
     return () => clearInterval(stopWatchInterval);
   }, [running, startMs, ms, lapTimeList, pausedDuration]);
 
   // Start / Stop Btn
-  const handleStartStopBtnClick = () => {
+  const handleStartStopBtnClick = useCallback(() => {
     const curr = Date.now();
 
     // if not started
@@ -62,10 +62,10 @@ const StopWatch = () => {
       setPausedDuration((prev) => prev + curr - pauseTime);
       setStartMs((prev) => prev + curr - pauseTime);
     }
-  };
+  }, [started, running, pauseTime]);
 
   // Lap Btn
-  const handleLapBtnClick = () => {
+  const handleLapBtnClick = useCallback(() => {
     const curr = Date.now();
     // Add current time
     setLapTimeList((prev) => [...prev, curr]);
@@ -77,7 +77,7 @@ const StopWatch = () => {
     });
     setPausedDuration(0);
     setCurrentLapDuration(0);
-  };
+  }, [lapTimeList, pausedDuration]);
 
   // Reset Btn
   const handeResetBtnClick = useCallback(() => {
@@ -93,8 +93,7 @@ const StopWatch = () => {
 
   return (
     <div className="miniApp">
-      <h2>Stop Watch</h2>
-      <Clock ms={ms} />
+      <Clock ms={ms} lapMs={currentLapDuration} />
       <TimeDisplay ms={ms} />
       <div className="left">
         {running ? (
