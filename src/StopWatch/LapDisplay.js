@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { getDisplayTime } from "../utils";
 
 const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
+  const lapDisplayList = useMemo(() => {
+    // console.log("render");
+    return lapTimeDifList
+      .slice(0)
+      .reverse()
+      .map((lap, index) => {
+        // console.log("asd");
+        return (
+          <div className="lap" key={index}>
+            <div className="left">Lap {lapTimeDifList.length - index}</div>
+            <div className="right">{getDisplayTime(lap)}</div>
+          </div>
+        );
+      });
+  }, [lapTimeDifList]);
+
   return (
     <div id="lapDisplay">
       {currentLapDuration ? (
@@ -11,19 +27,23 @@ const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
         </div>
       ) : null}
 
-      {lapTimeDifList
-        .slice(0)
-        .reverse()
-        .map((lap, index) => {
-          return (
-            <div className="lap" key={index}>
-              <div className="left">Lap {lapTimeDifList.length - index}</div>
-              <div className="right">{getDisplayTime(lap)}</div>
-            </div>
-          );
-        })}
+      {lapDisplayList}
     </div>
   );
 };
 
 export default LapDisplay;
+
+// Bad Performace:
+// const lapDisplayList = lapTimeDifList
+//     .slice(0)
+//     .reverse()
+//     .map((lap, index) => {
+//       console.log('asd');
+//       return (
+//         <div className="lap" key={index}>
+//           <div className="left">Lap {lapTimeDifList.length - index}</div>
+//           <div className="right">{getDisplayTime(lap)}</div>
+//         </div>
+//       );
+//     });

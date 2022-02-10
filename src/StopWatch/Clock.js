@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import React from "react";
+import { getDisplayTime } from "../utils";
 
 const Clock = ({ ms, lapMs }) => {
-  const msDeg = useMemo(() => (ms / 60000) * 360 - 90, [ms]);
-  const lapMsDeg = useMemo(() => (lapMs / 60000) * 360 - 90, [lapMs]);
-  const mmDeg = useMemo(() => (ms / 60000 / 60) * 360 - 90, [ms]);
+  const msDeg = (ms / 60000) * 360 - 90;
+  const lapMsDeg = (lapMs / 60000) * 360 - 90;
+  const mmDeg = (ms / 60000 / 60) * 360 - 90;
   return (
     <div id="clock">
       {/* Seconds */}
       <div className="circle">
+        <div className="time">{getDisplayTime(ms)}</div>
         {/* Minutes */}
         <div className="mini-circle">
           <div
