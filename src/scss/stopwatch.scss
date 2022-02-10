@@ -1,0 +1,154 @@
+:root {
+  --hand-size: 1%;
+
+  --orange: #fe9200;
+  --blue: #1172e2;
+  --gray: #545456;
+
+  --btn-gray: #3e3e3e;
+  --btn-darker-gray: #2d2d2d;
+
+  --text-green: #4ed866;
+  --text-white: #fafafa;
+  --text-red: #f73830;
+
+  --bg-dark: #0d0d0d;
+  --bg-dark-green: #172e1c;
+  --bg-darker-green: #132517;
+  --bg-darkest-green: #0e1b11;
+  --bg-dark-red: #331314;
+  --bg-darker-red: #2c1011;
+  --bg-darkest-red: #250e0f;
+}
+#stopWatch {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    width: 80%;
+  }
+
+  * {
+    color: var(--text-white);
+  }
+
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  #stopWatchTimeDisplay span {
+    margin: 2rem;
+  }
+  #clockPanel {
+    position: relative;
+    aspect-ratio: 1/1.1;
+    max-height: 60vh;
+    > div:not(#clock) {
+      position: absolute;
+      width: 25%;
+      aspect-ratio: 1;
+      bottom: 0;
+      button {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+      }
+    }
+    .right {
+      position: absolute;
+      right: 0;
+    }
+  }
+  #clock {
+    position: relative;
+    margin: 0 3%;
+    width: 94%;
+    aspect-ratio: 1/1;
+  }
+  .circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 100%;
+  }
+  .mini-circle {
+    position: absolute;
+    top: 12%;
+    right: 35%;
+    width: 30%;
+    height: 30%;
+    background-color: gray;
+    border-radius: 100%;
+  }
+  .hand {
+    position: absolute;
+    top: calc(50% - var(--hand-size) / 2);
+    height: var(--hand-size);
+    width: 100%;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  }
+  .m-hand {
+    background-color: var(--orange);
+    height: calc(var(--hand-size) * 3);
+  }
+  .s-hand {
+    background-color: var(--orange);
+  }
+  .s-hand.lap {
+    background-color: var(--blue);
+  }
+
+  /* ============Lap============ */
+  #lapDisplay {
+    font-size: max(2.5vw, 22px);
+    max-height: 35vh;
+    overflow-y: scroll;
+    .lap {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.2em 0.8em;
+      border-top: 1px gray solid;
+      &:last-child {
+        border-bottom: 1px gray solid;
+      }
+    }
+  }
+
+  /* ============Buttons Color============ */
+  button {
+    font-size: max(2.5vw, 22px);
+    &.start {
+      background-color: var(--bg-dark-green);
+      color: var(--text-green);
+    }
+    &.stop {
+      background-color: var(--bg-dark-red);
+      color: var(--text-red);
+    }
+    &.reset,
+    &.lap {
+      background-color: var(--btn-gray);
+    }
+    &:hover {
+      filter: brightness(0.9);
+    }
+    &:active {
+      filter: brightness(0.7);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    > div {
+      width: 95%;
+    }
+  }
+}

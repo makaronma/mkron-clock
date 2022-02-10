@@ -1,0 +1,17 @@
+:root {
+  background-color: black;
+  color: white;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+button {
+  user-select: none;
+}
+
+@media screen and (min-width: 768px) {
+  #App {
+    padding: 0 10%;
+  }
+}

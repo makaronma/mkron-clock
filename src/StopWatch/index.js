@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import TimeDisplay from "./TimeDisplay";
 import LapDisplay from "./LapDisplay";
 import Clock from "./Clock";
-import "../styles/stopwatch.css";
+import ControlPanel from "./ControlPanel";
+import "../scss/stopwatch.scss";
 
 const StopWatch = () => {
   const [startMs, setStartMs] = useState(0);
@@ -92,22 +93,16 @@ const StopWatch = () => {
   }, []);
 
   return (
-    <div className="miniApp">
-      <Clock ms={ms} lapMs={currentLapDuration} />
+    <div id="stopWatch">
       <TimeDisplay ms={ms} />
-      <div className="left">
-        {running ? (
-          <button onClick={handleLapBtnClick}>Lap</button>
-        ) : (
-          <button onClick={handeResetBtnClick}>Reset</button>
-        )}
-      </div>
-      <div className="right">
-        {running ? (
-          <button onClick={handleStartStopBtnClick}>Stop</button>
-        ) : (
-          <button onClick={handleStartStopBtnClick}>Start</button>
-        )}
+      <div id="clockPanel">
+        <Clock ms={ms} lapMs={currentLapDuration} />
+        <ControlPanel
+          running={running}
+          handleLapBtnClick={handleLapBtnClick}
+          handeResetBtnClick={handeResetBtnClick}
+          handleStartStopBtnClick={handleStartStopBtnClick}
+        />
       </div>
       <LapDisplay
         lapTimeDifList={lapTimeDifList}

@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { getDisplayTime } from "../utils";
 
 const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
   return (
-    <div id="stopWatchLapDisplay">
+    <div id="lapDisplay">
       {currentLapDuration ? (
         <div className="lap">
           <div className="left">Lap {lapTimeDifList.length + 1}</div>
