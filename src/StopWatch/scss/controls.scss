@@ -1,0 +1,46 @@
+/* ============Buttons Color============ */
+#stopWatch {
+  button {
+    font-size: max(2.5vw, 22px);
+    &.start {
+      background-color: var(--bg-dark-green);
+      color: var(--text-green);
+    }
+    &.stop {
+      background-color: var(--bg-dark-red);
+      color: var(--text-red);
+    }
+    &.reset,
+    &.lap {
+      background-color: var(--btn-gray);
+    }
+    &:hover {
+      filter: brightness(0.9);
+    }
+    &:active {
+      filter: brightness(0.7);
+    }
+  }
+
+  .bullets {
+    position: absolute;
+    bottom: 6%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .bullet {
+      width: 2%;
+      aspect-ratio: 1;
+      border-radius: 100%;
+      border: var(--text-white) 2px solid;
+      cursor: pointer;
+      &:not(:last-child) {
+        margin-right: 2%;
+      }
+      &.current {
+        background-color: var(--text-white);
+      }
+    }
+  }
+}

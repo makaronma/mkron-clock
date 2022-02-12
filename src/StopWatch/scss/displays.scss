@@ -1,0 +1,179 @@
+#stopWatch {
+  .displays {
+    transition: transform 0.5s;
+    user-select: none;
+  }
+
+  /* ============Lap============ */
+  #lapDisplay {
+    font-size: max(2.5vw, 22px);
+    max-height: 35vh;
+    overflow-y: auto;
+    .lap {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.2em 0.8em;
+      border-top: 1px gray solid;
+      &:last-child {
+        border-bottom: 1px gray solid;
+      }
+    }
+  }
+
+  /* ============Only Time Display============ */
+  #timeDisplay {
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1;
+    font-size: min(5em, 20vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ============Clock============ */
+  #clockPanel {
+    position: relative;
+    aspect-ratio: 1/1.1;
+    max-height: 60vh;
+    overflow: hidden;
+    > .left,
+    .right {
+      position: absolute;
+      width: 22%;
+      aspect-ratio: 1;
+      bottom: 0;
+      button {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+      }
+    }
+    .right {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  /* ============Clock Display============ */
+  #clock {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    transform: translateX(100%);
+  }
+  .circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    // background-color: white;
+    border-radius: 100%;
+    .time {
+      position: absolute;
+      bottom: 20%;
+      width: 100%;
+      color: black;
+      text-align: center;
+      font-size: max(2.5vw, 22px);
+    }
+  }
+  .mini-circle {
+    position: absolute;
+    top: 12%;
+    right: 35%;
+    width: 30%;
+    height: 30%;
+    border-radius: 100%;
+  }
+
+  /* ============Clock Hands============ */
+  .hand {
+    position: absolute;
+    top: calc(50% - var(--hand-size) / 2);
+    height: var(--hand-size);
+    width: 100%;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  }
+  .m-hand {
+    background-color: var(--orange);
+    height: calc(var(--hand-size) * 3);
+  }
+  .s-hand {
+    background-color: var(--orange);
+  }
+  .s-hand.lap {
+    background-color: var(--blue);
+  }
+
+  /* ============Clock (Seconds) Frame Display============ */
+  .circle > .layouts {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .frame {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      height: 0.5%;
+      &.long {
+        background: var(--text-white);
+      }
+      &.mid,
+      &.short {
+        background: var(--btn-gray);
+      }
+    }
+    .short-cover,
+    .mid-cover,
+    .long-cover {
+      width: 90%;
+      aspect-ratio: 1;
+      position: absolute;
+      background: black;
+      border-radius: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .short-cover {
+      width: 95%;
+    }
+  }
+
+  /* ============Clock (Minutes) Frame Display============ */
+  .mini-circle > .layouts {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .frame {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      height: 2%;
+      &.long {
+        background: var(--text-white);
+      }
+      &.mid,
+      &.short {
+        background: var(--btn-gray);
+      }
+    }
+    .short-cover,
+    .mid-cover,
+    .long-cover {
+      width: 80%;
+      aspect-ratio: 1;
+      position: absolute;
+      background: black;
+      border-radius: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .short-cover {
+      width: 90%;
+    }
+  }
+}
