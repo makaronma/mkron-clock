@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import TimeDisplay from "./TimeDisplay";
-import LapDisplay from "./LapDisplay";
-import Clock from "./Clock";
-import ControlPanel from "./ControlPanel";
+import TimeDisplay from "./components/TimeDisplay";
+import LapDisplay from "./components/LapDisplay";
+import Clock from "./components/Clock";
+import ControlPanel from "./components/ControlPanel";
 import "../scss/stopwatch.scss";
 
 const StopWatch = () => {
@@ -18,6 +18,9 @@ const StopWatch = () => {
 
   const [pauseTime, setPauseTime] = useState(null);
   const [pausedDuration, setPausedDuration] = useState(0);
+
+  const [displayForm, setDisplayForm] = useState(0);
+  const [overrideStyles, setOverrideStyles] = useState({});
 
   // Init Time
   useEffect(() => {
@@ -92,17 +95,42 @@ const StopWatch = () => {
     setCurrentLapDuration(0);
   }, []);
 
+  useEffect(() => {
+    if (displayForm === 1) {
+      setOverrideStyles({
+        timeDisplay: { transform: "translateX(-100%)" },
+        clock: { transform: "translateX(0%)" },
+      });
+    }else{
+      setOverrideStyles({});
+    }
+  }, [displayForm]);
+
   return (
     <div id="stopWatch">
-      <TimeDisplay ms={ms} />
       <div id="clockPanel">
-        <Clock ms={ms} lapMs={currentLapDuration} />
+        <TimeDisplay ms={ms} overrideStyle={overrideStyles.timeDisplay} />
+        <Clock
+          ms={ms}
+          lapMs={currentLapDuration}
+          overrideStyle={overrideStyles.clock}
+        />
         <ControlPanel
           running={running}
           handleLapBtnClick={handleLapBtnClick}
           handeResetBtnClick={handeResetBtnClick}
           handleStartStopBtnClick={handleStartStopBtnClick}
         />
+        <div className="bullets">
+          <div
+            className={`bullet ${displayForm === 0 ? "current" : null}`}
+            onClick={()=>setDisplayForm(0)}
+          ></div>
+          <div
+            className={`bullet ${displayForm === 1 ? "current" : null}`}
+            onClick={()=>setDisplayForm(1)}
+          ></div>
+        </div>
       </div>
       <LapDisplay
         lapTimeDifList={lapTimeDifList}

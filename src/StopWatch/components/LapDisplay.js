@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { getDisplayTime } from "../utils";
+import { getDisplayTime } from "../../utils";
 
 const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
   const lapDisplayList = useMemo(() => {
