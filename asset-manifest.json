@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mkron-clock/static/css/main.46da788f.css",
-    "main.js": "/mkron-clock/static/js/main.ed8bd5dd.js",
+    "main.css": "/mkron-clock/static/css/main.c9627ba5.css",
+    "main.js": "/mkron-clock/static/js/main.f404ba0e.js",
     "index.html": "/mkron-clock/index.html",
-    "main.46da788f.css.map": "/mkron-clock/static/css/main.46da788f.css.map",
-    "main.ed8bd5dd.js.map": "/mkron-clock/static/js/main.ed8bd5dd.js.map"
+    "main.c9627ba5.css.map": "/mkron-clock/static/css/main.c9627ba5.css.map",
+    "main.f404ba0e.js.map": "/mkron-clock/static/js/main.f404ba0e.js.map"
   },
   "entrypoints": [
-    "static/css/main.46da788f.css",
-    "static/js/main.ed8bd5dd.js"
+    "static/css/main.c9627ba5.css",
+    "static/js/main.f404ba0e.js"
   ]
 }
