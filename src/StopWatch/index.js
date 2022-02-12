@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import TimeDisplay from "./components/TimeDisplay";
 import LapDisplay from "./components/LapDisplay";
 import Clock from "./components/Clock";
@@ -20,7 +20,8 @@ const StopWatch = () => {
   const [pausedDuration, setPausedDuration] = useState(0);
 
   const [displayForm, setDisplayForm] = useState(0);
-  const [overrideStyles, setOverrideStyles] = useState({});
+  const touchStartPos = useRef();
+  const displaysContainer = useRef();
 
   // Init Time
   useEffect(() => {
@@ -95,26 +96,36 @@ const StopWatch = () => {
     setCurrentLapDuration(0);
   }, []);
 
-  useEffect(() => {
-    if (displayForm === 1) {
-      setOverrideStyles({
-        timeDisplay: { transform: "translateX(-100%)" },
-        clock: { transform: "translateX(0%)" },
-      });
-    }else{
-      setOverrideStyles({});
+  // Handle swipe
+  const handleTouchStart=(e)=>{
+    touchStartPos.current = e.touches[0].clientX;
+  }
+  const handleTouchEnd=(e)=>{
+    const touchEndPos = e.changedTouches[0].clientX;
+    const posDif = touchEndPos - touchStartPos.current;
+    const {width} = displaysContainer.current.getBoundingClientRect();
+    if (posDif < -width / 2) {
+      setDisplayForm(1)
+    } else if (posDif > width / 2) {
+      setDisplayForm(0)
     }
-  }, [displayForm]);
+  }
 
   return (
     <div id="stopWatch">
       <div id="clockPanel">
-        <TimeDisplay ms={ms} overrideStyle={overrideStyles.timeDisplay} />
-        <Clock
-          ms={ms}
-          lapMs={currentLapDuration}
-          overrideStyle={overrideStyles.clock}
-        />
+        <div
+          className="displays"
+          style={{
+            transform: `translateX(${displayForm === 1 ? "-100%" : "0"})`,
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          ref={displaysContainer}
+        >
+          <TimeDisplay ms={ms} />
+          <Clock ms={ms} lapMs={currentLapDuration} />
+        </div>
         <ControlPanel
           running={running}
           handleLapBtnClick={handleLapBtnClick}
@@ -124,11 +135,11 @@ const StopWatch = () => {
         <div className="bullets">
           <div
             className={`bullet ${displayForm === 0 ? "current" : null}`}
-            onClick={()=>setDisplayForm(0)}
+            onClick={() => setDisplayForm(0)}
           ></div>
           <div
             className={`bullet ${displayForm === 1 ? "current" : null}`}
-            onClick={()=>setDisplayForm(1)}
+            onClick={() => setDisplayForm(1)}
           ></div>
         </div>
       </div>
