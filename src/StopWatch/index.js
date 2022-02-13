@@ -104,9 +104,9 @@ const StopWatch = () => {
     const touchEndPos = e.changedTouches[0].clientX;
     const posDif = touchEndPos - touchStartPos.current;
     const {width} = displaysContainer.current.getBoundingClientRect();
-    if (posDif < -width / 2) {
+    if (posDif < -width / 4) {
       setDisplayForm(1)
-    } else if (posDif > width / 2) {
+    } else if (posDif > width / 4) {
       setDisplayForm(0)
     }
   }
