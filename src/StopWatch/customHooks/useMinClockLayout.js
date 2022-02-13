@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const useMinClockLayout = () => {
   const [minLongList, setMinLongList] = useState([]);
@@ -30,7 +31,7 @@ const useMinClockLayout = () => {
           </div>
         </>
       );
-      setMinLongList((prev) => [...prev, <Long key={i} />]);
+      setMinLongList((prev) => [...prev, <Long key={uuidv4()} />]);
     }
 
     for (let i = 0; i < numOfMid / 2; i++) {
@@ -40,7 +41,7 @@ const useMinClockLayout = () => {
           style={{ transform: `rotate(${(360 / numOfMid) * (i + 1) + 90}deg)` }}
         ></div>
       );
-      setMinMidList((prev) => [...prev, <Mid key={i} />]);
+      setMinMidList((prev) => [...prev, <Mid key={uuidv4()} />]);
     }
     for (let i = 0; i < numOfShort / 2; i++) {
       const Short = () => (
@@ -53,7 +54,7 @@ const useMinClockLayout = () => {
           }}
         ></div>
       );
-      setMinShortList((prev) => [...prev, <Short key={i} />]);
+      setMinShortList((prev) => [...prev, <Short key={uuidv4()} />]);
     }
   }, []);
 

@@ -5,7 +5,7 @@ import Timer from "./Timer";
 import WorldClock from "./WorldClock";
 
 function App() {
-  const [usingAppName, setUsingAppName] = useState();
+  const [usingAppName, setUsingAppName] = useState("StopWatch");
   const [usingApp, setUsingApp] = useState();
 
   useMemo(() => {

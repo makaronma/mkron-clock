@@ -17,6 +17,12 @@
       &:last-child {
         border-bottom: 1px gray solid;
       }
+      &.min > div {
+        color: var(--text-green);
+      }
+      &.max > div {
+        color: var(--text-red);
+      }
     }
   }
 
