@@ -24,7 +24,7 @@
 
   .bullets {
     position: absolute;
-    bottom: 6%;
+    bottom: 4%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@
       width: 2%;
       aspect-ratio: 1;
       border-radius: 100%;
-      border: var(--text-white) 2px solid;
+      background-color: gray;
       cursor: pointer;
       &:not(:last-child) {
         margin-right: 2%;

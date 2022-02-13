@@ -11,13 +11,24 @@ const useMinClockLayout = () => {
     const numOfShort = 30;
 
     for (let i = 0; i < numOfLong / 2; i++) {
+      const deg = (360 / numOfLong) * (i + 1) + 90;
       const Long = () => (
-        <div
-          className="frame long"
-          style={{
-            transform: `rotate(${(360 / numOfLong) * (i + 1) + 90}deg)`,
-          }}
-        ></div>
+        <>
+          <div
+            className="frame long"
+            style={{
+              transform: `rotate(${deg}deg)`,
+            }}
+          ></div>
+          <div className="timeNum" style={{ transform: `rotate(${deg}deg)` }}>
+            <span style={{ transform: `rotate(-${deg}deg)`, left: "15%" }}>
+              {(i + 1) * 5}
+            </span>
+            <span style={{ transform: `rotate(-${deg}deg)`, right: "15%" }}>
+              {(i + 1) * 5 + 15}
+            </span>
+          </div>
+        </>
       );
       setMinLongList((prev) => [...prev, <Long key={i} />]);
     }

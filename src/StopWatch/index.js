@@ -134,11 +134,11 @@ const StopWatch = () => {
         />
         <div className="bullets">
           <div
-            className={`bullet ${displayForm === 0 ? "current" : null}`}
+            className={`bullet ${displayForm === 0 ? "current" : ''}`}
             onClick={() => setDisplayForm(0)}
           ></div>
           <div
-            className={`bullet ${displayForm === 1 ? "current" : null}`}
+            className={`bullet ${displayForm === 1 ? "current" : ''}`}
             onClick={() => setDisplayForm(1)}
           ></div>
         </div>

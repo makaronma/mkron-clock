@@ -64,6 +64,7 @@ const Clock = ({ ms, lapMs }) => {
             className="m-hand hand"
             style={{ transform: `rotate(${mmDeg}deg)` }}
           ></div>
+          <div className="m-center center"></div>
         </div>
         <div
           className="lap s-hand hand"
@@ -73,6 +74,7 @@ const Clock = ({ ms, lapMs }) => {
           className="s-hand hand"
           style={{ transform: `rotate(${msDeg}deg)` }}
         ></div>
+        <div className="s-center center"></div>
       </div>
     </div>
   );

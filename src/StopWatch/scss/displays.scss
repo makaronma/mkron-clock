@@ -79,7 +79,7 @@
   }
   .mini-circle {
     position: absolute;
-    top: 12%;
+    top: 15%;
     right: 35%;
     width: 30%;
     height: 30%;
@@ -92,17 +92,66 @@
     top: calc(50% - var(--hand-size) / 2);
     height: var(--hand-size);
     width: 100%;
-    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
   }
   .m-hand {
     background-color: var(--orange);
     height: calc(var(--hand-size) * 3);
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
   }
   .s-hand {
     background-color: var(--orange);
+    clip-path: polygon(40% 0, 100% 0, 100% 100%, 40% 100%);
   }
   .s-hand.lap {
     background-color: var(--blue);
+  }
+
+  .center {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: min(0.7vw, 3px) solid var(--orange);
+  }
+  .s-center {
+    background: var(--bg-dark);
+    width: var(--hand-center-size);
+    top: calc(50% - var(--hand-center-size) / 2);
+    left: calc(50% - var(--hand-center-size) / 2);
+  }
+  .m-center {
+    background-color: var(--orange);
+    border: min(0.7vw, 3px) solid var(--orange);
+    width: var(--hand-m-center-size);
+    top: calc(50% - var(--hand-m-center-size) / 2);
+    left: calc(50% - var(--hand-m-center-size) / 2);
+  }
+
+  /* ============Clock Time Number Display============ */
+
+  .circle .timeNum {
+    position: absolute;
+    width: 100%;
+    top: 49.75%;
+    height: 0.5%;
+    z-index: 1;
+    span {
+      position: absolute;
+      bottom: -0.5em;
+      font-size: max(3.5vw, 30px);
+    }
+  }
+
+  .mini-circle .timeNum {
+    position: absolute;
+    width: 100%;
+    top: 49.75%;
+    height: 0.5%;
+    z-index: 1;
+    span {
+      position: absolute;
+      bottom: -0.5em;
+      font-size: max(2vw, 15px);
+    }
   }
 
   /* ============Clock (Seconds) Frame Display============ */
@@ -114,7 +163,7 @@
     .frame {
       position: absolute;
       width: 100%;
-      top: 50%;
+      top: 49.75%;
       height: 0.5%;
       &.long {
         background: var(--text-white);

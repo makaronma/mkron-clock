@@ -1,5 +1,7 @@
 :root {
   --hand-size: 1%;
+  --hand-center-size: 2.5%;
+  --hand-m-center-size: 7.5%;
 
   --orange: #fe9200;
   --blue: #1172e2;
@@ -22,6 +24,7 @@
 }
 
 #stopWatch {
+  --word-size: min(5em, 20vw);
   display: flex;
   flex-direction: column;
   justify-content: center;
