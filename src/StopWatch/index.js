@@ -3,7 +3,6 @@ import TimeDisplay from "./components/TimeDisplay";
 import LapDisplay from "./components/LapDisplay";
 import Clock from "./components/Clock";
 import ControlPanel from "./components/ControlPanel";
-import "./scss/index.scss";
 
 const StopWatch = () => {
   const [startMs, setStartMs] = useState(0);

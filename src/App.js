@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import "./scss/app.scss";
+import "./styles/app.scss";
 import StopWatch from "./StopWatch";
 import Timer from "./Timer";
 import WorldClock from "./WorldClock";
