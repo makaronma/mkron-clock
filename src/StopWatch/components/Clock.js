@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import { useMemo, useCallback, memo } from "react";
 import { getDisplayTime } from "../../utils";
 import useClockLayout from "../customHooks/useClockLayout";
 import useMinClockLayout from "../customHooks/useMinClockLayout";
@@ -80,4 +80,4 @@ const Clock = ({ ms, lapMs }) => {
   );
 };
 
-export default Clock;
+export default memo(Clock);

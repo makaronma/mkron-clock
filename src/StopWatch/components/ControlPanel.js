@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 
 const ControlPanel = ({
   running,
@@ -34,4 +34,4 @@ const ControlPanel = ({
   );
 };
 
-export default ControlPanel;
+export default memo(ControlPanel);

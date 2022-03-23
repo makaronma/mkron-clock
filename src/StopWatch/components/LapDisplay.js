@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import { useMemo,memo } from "react";
 import { getDisplayTime } from "../../utils";
 import useMaxMinLap from "../customHooks/useMaxMinLap";
-import { v4 as uuidv4 } from 'uuid';
 
 const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
   const [maxLap, minLap] = useMaxMinLap(lapTimeDifList);
@@ -14,7 +13,7 @@ const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
         const classMax = lap === maxLap ? "max " : "";
         const classMin = lap === minLap ? "min" : "";
         return (
-          <div className={`lap ${classMax}${classMin}`} key={uuidv4()}>
+          <div className={`lap ${classMax}${classMin}`} key={`lap-item-${index}`}>
             <div className="left">Lap {lapTimeDifList.length - index}</div>
             <div className="right">{getDisplayTime(lap)}</div>
           </div>
@@ -36,7 +35,7 @@ const LapDisplay = ({ lapTimeDifList, currentLapDuration }) => {
   );
 };
 
-export default LapDisplay;
+export default memo(LapDisplay);
 
 // Bad Performace:
 // const lapDisplayList = lapTimeDifList
